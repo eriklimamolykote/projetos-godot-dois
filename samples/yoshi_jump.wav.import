@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/yoshi_jump.wav-fe7374d042333c4b5b1ce2ca37de0553.sample"
+
+[deps]
+
+source_file="res://samples/yoshi_jump.wav"
+dest_files=[ "res://.import/yoshi_jump.wav-fe7374d042333c4b5b1ce2ca37de0553.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

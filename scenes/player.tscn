@@ -1,11 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://resources/player_skin_pink.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://resources/player_skin_brown.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://samples/yoshi_jump.wav" type="AudioStream" id=3]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 60.0
-height = 122.0
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 60, 62.5 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -61,17 +61,137 @@ tracks/1/keys = {
 "values": [ Vector2( 1.40496, 0.554726 ), Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/smoke.png-667afbd25a653ed950eec9609e0821d3.stex"
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/smoke.png-667afbd25a653ed950eec9609e0821d3.stex"
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "dust"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.18 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.27 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="player" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 1.40496, 0.554726 )
 frames = ExtResource( 1 )
 animation = "walk"
 
 [node name="shape" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+position = Vector2( 1, 13.5 )
+shape = SubResource( 9 )
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2( 600, 0 )
@@ -83,3 +203,24 @@ limit_bottom = 0
 [node name="anim_landed" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/boing = SubResource( 4 )
+
+[node name="dust" type="Node2D" parent="."]
+scale = Vector2( 1e-05, 1e-05 )
+
+[node name="smoke" type="Sprite" parent="dust"]
+position = Vector2( 101, 60 )
+scale = Vector2( 1.40496, 0.554726 )
+texture = SubResource( 5 )
+
+[node name="smoke2" type="Sprite" parent="dust"]
+position = Vector2( -98, 64 )
+scale = Vector2( 1.40496, 0.554726 )
+texture = SubResource( 6 )
+
+[node name="anim" type="AnimationPlayer" parent="dust"]
+anims/RESET = SubResource( 7 )
+anims/dust = SubResource( 8 )
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "fx"

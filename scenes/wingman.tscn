@@ -1,0 +1,239 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://sprites/Enemies/wingMan5.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Particles/portal_yellowParticle.png" type="Texture" id=2]
+[ext_resource path="res://sprites/Enemies/wingMan3.png" type="Texture" id=3]
+[ext_resource path="res://sprites/Particles/smoke.png" type="Texture" id=4]
+[ext_resource path="res://sprites/Enemies/wingMan1.png" type="Texture" id=5]
+[ext_resource path="res://samples/enemyhurt.wav" type="AudioStream" id=6]
+[ext_resource path="res://sprites/Enemies/wingMan4.png" type="Texture" id=7]
+[ext_resource path="res://sprites/Enemies/wingMan2.png" type="Texture" id=8]
+[ext_resource path="res://scripts/wingman.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 44.5, 26.125 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 45.5, 37.5 )
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../sprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "destroy"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.44 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.29, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.07, 0.29, 0.69 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.06, 0.46, 0.69 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../sprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.07, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="wingman" type="Node2D"]
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 7 )
+frame = 1
+playing = true
+
+[node name="head" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="shape" type="CollisionShape2D" parent="head"]
+position = Vector2( 0.5, -37.875 )
+shape = SubResource( 6 )
+
+[node name="body" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="shape" type="CollisionShape2D" parent="body"]
+position = Vector2( 0.5, 27.5 )
+shape = SubResource( 8 )
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "fx"
+
+[node name="smoke" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="Smoke" type="Sprite" parent="smoke"]
+position = Vector2( 1, 135 )
+texture = ExtResource( 4 )
+
+[node name="Smoke2" type="Sprite" parent="smoke"]
+position = Vector2( -103, 79 )
+texture = ExtResource( 4 )
+
+[node name="Smoke3" type="Sprite" parent="smoke"]
+position = Vector2( -107, -89 )
+texture = ExtResource( 4 )
+
+[node name="Smoke4" type="Sprite" parent="smoke"]
+position = Vector2( -2, -144 )
+texture = ExtResource( 4 )
+
+[node name="Smoke5" type="Sprite" parent="smoke"]
+position = Vector2( 110, -87 )
+texture = ExtResource( 4 )
+
+[node name="Smoke6" type="Sprite" parent="smoke"]
+position = Vector2( 110, 80 )
+texture = ExtResource( 4 )
+
+[node name="PortalYellowParticle" type="Sprite" parent="smoke"]
+position = Vector2( -164, -9 )
+texture = ExtResource( 2 )
+
+[node name="PortalYellowParticle2" type="Sprite" parent="smoke"]
+position = Vector2( -74, -162 )
+texture = ExtResource( 2 )
+
+[node name="PortalYellowParticle3" type="Sprite" parent="smoke"]
+position = Vector2( 108, -172 )
+texture = ExtResource( 2 )
+
+[node name="PortalYellowParticle4" type="Sprite" parent="smoke"]
+position = Vector2( 151, 4 )
+texture = ExtResource( 2 )
+
+[node name="PortalYellowParticle5" type="Sprite" parent="smoke"]
+position = Vector2( -102, 157 )
+texture = ExtResource( 2 )
+
+[node name="PortalYellowParticle6" type="Sprite" parent="smoke"]
+position = Vector2( 110, 156 )
+texture = ExtResource( 2 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../smoke")
+anims/RESET = SubResource( 9 )
+anims/destroy = SubResource( 10 )
+
+[connection signal="body_entered" from="head" to="." method="_on_head_body_entered"]
+[connection signal="body_entered" from="body" to="." method="_on_body_body_entered"]

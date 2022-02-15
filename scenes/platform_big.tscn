@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/Environment/ground_cake.png" type="Texture" id=1]
+[ext_resource path="res://scripts/platform_big.gd" type="Script" id=2]
+
+[node name="platform_big" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="poly" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -164, 44, -190, -15, -187, -42, -178, -47, 178, -46, 188, -36, 189, -18, 159, 36 )
+
+[node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

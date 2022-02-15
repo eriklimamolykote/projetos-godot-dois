@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mario_coil.wav-2c4b067926d1fc53e15f8a0aa3d93f28.sample"
+
+[deps]
+
+source_file="res://samples/mario_coil.wav"
+dest_files=[ "res://.import/mario_coil.wav-2c4b067926d1fc53e15f8a0aa3d93f28.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

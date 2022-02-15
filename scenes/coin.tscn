@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://sprites/Particles/portal_yellowParticle.png" type="Texture" id=1]
+[ext_resource path="res://samples/sonic_ring.wav" type="AudioStream" id=2]
+[ext_resource path="res://scripts/coin.gd" type="Script" id=3]
+[ext_resource path="res://sprites/Items/gold_3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/Items/gold_2.png" type="Texture" id=5]
+[ext_resource path="res://sprites/Items/gold_1.png" type="Texture" id=6]
+[ext_resource path="res://sprites/Items/gold_4.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 33.1361
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+spread = 80.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.12
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="coin" type="Area2D"]
+collision_layer = 0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+playing = true
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
+[node name="fx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "fx"
+
+[node name="queue_timer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="particles" type="Particles2D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource( 8 )
+texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_coin_body_entered"]
+[connection signal="timeout" from="queue_timer" to="." method="_on_queue_timer_timeout"]
