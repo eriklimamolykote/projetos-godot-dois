@@ -1,8 +1,66 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://resources/player_skin_brown.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 [ext_resource path="res://samples/yoshi_jump.wav" type="AudioStream" id=3]
+[ext_resource path="res://samples/kirby_life_lost.wav" type="AudioStream" id=4]
+[ext_resource path="res://sprites/Items/wing_right.png" type="Texture" id=5]
+[ext_resource path="res://sprites/Items/wing_left.png" type="Texture" id=6]
+[ext_resource path="res://samples/flap.wav" type="AudioStream" id=7]
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WingRight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 68.2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WingLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -65.4 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "flap"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WingRight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 68.2, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WingLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -65.4, 0.0 ]
+}
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 60, 62.5 )
@@ -185,9 +243,28 @@ tracks/3/keys = {
 collision_mask = 2
 script = ExtResource( 2 )
 
+[node name="wings" type="Node2D" parent="."]
+
+[node name="WingRight" type="Sprite" parent="wings"]
+position = Vector2( 42, 2 )
+rotation = 1.19031
+texture = ExtResource( 5 )
+offset = Vector2( 67, -29 )
+
+[node name="WingLeft" type="Sprite" parent="wings"]
+position = Vector2( -44, 0 )
+rotation = -1.14145
+texture = ExtResource( 6 )
+offset = Vector2( -64, -21 )
+
+[node name="anim" type="AnimationPlayer" parent="wings"]
+anims/RESET = SubResource( 11 )
+anims/flap = SubResource( 10 )
+
 [node name="sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.40496, 0.554726 )
 frames = ExtResource( 1 )
-animation = "walk"
+animation = "victory"
 
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 13.5 )
@@ -223,4 +300,12 @@ anims/dust = SubResource( 8 )
 
 [node name="jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "fx"
+
+[node name="dead" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "fx"
+
+[node name="flap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 bus = "fx"

@@ -4,12 +4,13 @@ func _ready():
 	pass 
 
 func _on_head_body_entered(body):
+	$hurt.play()
+	$sprite.visible = false
 	$body.collision_mask = 0
 	body.jump(800, false)
-	$hurt.play()
-	$anim.play("destroy")
-	yield($anim, "animation_finished")
-	queue_free()
+	#yield($hurt, "finished")
+	#queue_free()
 
 func _on_body_body_entered(body):
 	print("_on_body_body_entered")
+	body.killed()

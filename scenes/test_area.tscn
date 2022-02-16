@@ -1,54 +1,38 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/coil.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/coin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/platform_big.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/wingman.tscn" type="PackedScene" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 822.75, 30 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 292.5, 30 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 138.25, 30 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 138.25, 30 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 138.25, 30 )
+[ext_resource path="res://scenes/carrot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/parallax_blue.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/parallax.gd" type="Script" id=8]
 
 [node name="test_area" type="Node2D"]
 
+[node name="platforms" type="Node2D" parent="."]
+
+[node name="platform_big" parent="platforms" instance=ExtResource( 4 )]
+position = Vector2( 188, 780 )
+
+[node name="platform_big2" parent="platforms" instance=ExtResource( 4 )]
+position = Vector2( 772, 824 )
+
+[node name="platform_big3" parent="platforms" instance=ExtResource( 4 )]
+position = Vector2( 1372, 916 )
+
+[node name="platform_big4" parent="platforms" instance=ExtResource( 4 )]
+position = Vector2( 2608, 1060 )
+
+[node name="platform_big5" parent="platforms" instance=ExtResource( 4 )]
+position = Vector2( 3292, 816 )
+
+[node name="platform_big6" parent="platforms" instance=ExtResource( 4 )]
+position = Vector2( 4336, 856 )
+
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 346, 542 )
-
-[node name="floor" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-
-[node name="shape" type="CollisionShape2D" parent="floor"]
-position = Vector2( 732.75, 1050 )
-shape = SubResource( 1 )
-
-[node name="shape2" type="CollisionShape2D" parent="floor"]
-position = Vector2( 1844, 866 )
-shape = SubResource( 2 )
-
-[node name="shape3" type="CollisionShape2D" parent="floor"]
-position = Vector2( 2442, 1050 )
-shape = SubResource( 3 )
-
-[node name="shape4" type="CollisionShape2D" parent="floor"]
-position = Vector2( 2918, 1054 )
-shape = SubResource( 4 )
-
-[node name="shape5" type="CollisionShape2D" parent="floor"]
-position = Vector2( 3314, 810 )
-shape = SubResource( 5 )
+position = Vector2( 62, 630 )
 
 [node name="coil" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2544, 956 )
@@ -74,14 +58,16 @@ position = Vector2( 2608, 544 )
 [node name="coin6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2736, 348 )
 
-[node name="platform_big" parent="." instance=ExtResource( 4 )]
-position = Vector2( 360, 860 )
-
-[node name="platform_big2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1376, 924 )
-
 [node name="wingman" parent="." instance=ExtResource( 5 )]
-position = Vector2( 696, 928 )
+position = Vector2( 1864, 236 )
 
 [node name="wingman2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1028, 932 )
+position = Vector2( 3812, 748 )
+
+[node name="parallax" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 8 )
+modulate_l1 = Color( 0, 0.25098, 1, 1 )
+modulate_l3 = Color( 0.372549, 0.0509804, 0.0509804, 1 )
+modulate_l4 = Color( 0.180392, 0.780392, 0.113725, 1 )
+
+[node name="carrot" parent="." instance=ExtResource( 6 )]
