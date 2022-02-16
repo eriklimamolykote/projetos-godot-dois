@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/power_up_box.gd" type="Script" id=1]
+[ext_resource path="res://sprites/UI/grey_panel.png" type="Texture" id=2]
+[ext_resource path="res://sprites/UI/blue_button00.png" type="Texture" id=3]
+
+[node name="power_up_box" type="Node2D" groups=["power_up_bar"]]
+scale = Vector2( 0.5, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="base" type="NinePatchRect" parent="."]
+margin_left = 112.0
+margin_right = 1789.0
+margin_bottom = 94.0
+texture = ExtResource( 2 )
+region_rect = Rect2( 7, 1, 10, 4 )
+patch_margin_left = 82
+patch_margin_top = 94
+patch_margin_right = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bar" type="NinePatchRect" parent="."]
+margin_left = 126.0
+margin_top = 14.0
+margin_right = 1775.0
+margin_bottom = 80.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, -1, 185, 47 )
+patch_margin_left = 9
+patch_margin_top = 17
+patch_margin_right = 20
+patch_margin_bottom = 41
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tween" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="tween" to="." method="_on_tween_tween_completed"]

@@ -5,3 +5,7 @@ func _ready():
 
 func _on_carrot_body_entered(body):
 	body.victory()
+
+
+func _on_deadzone_body_entered(body):
+	body.killed()

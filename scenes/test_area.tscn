@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/coil.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://scenes/carrot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/parallax_blue.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/parallax.gd" type="Script" id=8]
+[ext_resource path="res://scenes/power_up_box.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/coin_counter.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/spikes.tscn" type="PackedScene" id=11]
 
 [node name="test_area" type="Node2D"]
 
@@ -66,8 +69,19 @@ position = Vector2( 3812, 748 )
 
 [node name="parallax" parent="." instance=ExtResource( 7 )]
 script = ExtResource( 8 )
-modulate_l1 = Color( 0, 0.25098, 1, 1 )
-modulate_l3 = Color( 0.372549, 0.0509804, 0.0509804, 1 )
+modulate_l1 = Color( 0, 0.368627, 1, 1 )
+modulate_l2 = Color( 0, 0.952941, 1, 1 )
+modulate_l3 = Color( 0.419608, 1, 0.494118, 1 )
 modulate_l4 = Color( 0.180392, 0.780392, 0.113725, 1 )
 
 [node name="carrot" parent="." instance=ExtResource( 6 )]
+position = Vector2( 784, 760 )
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="power_up_box" parent="hud" instance=ExtResource( 9 )]
+position = Vector2( 571, 11 )
+
+[node name="coin_counter" parent="hud" instance=ExtResource( 10 )]
+
+[node name="spikes" parent="." instance=ExtResource( 11 )]

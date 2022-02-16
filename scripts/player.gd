@@ -62,7 +62,7 @@ func dead(delta):
 	velocity.y += grav * delta						
 
 func _input(event):
-		if Input.is_action_pressed("ui_jump"):
+		if event is InputEventScreenTouch or Input.is_action_pressed("ui_jump"):
 			if event.pressed:
 				jump = true	
 			else:
@@ -74,8 +74,12 @@ func flying(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	if jump:
 		$wings/anim.play("flap")
-		jump(400, false)
-		$flap.play()				
+		jump(800, false)
+		$flap.play()
+		
+	if is_on_floor():
+		get_tree().call_group("power_up_bar", "stop")
+		powerup_finished()					
 						
 func jump(force, controlled):
 	velocity.y = -force
@@ -91,10 +95,15 @@ func killed():
 
 func fly():
 	$sprite.play("jump")
-	jump(400, false)
+	jump(800, false)
 	status = FLYING
 	$wings.visible = true
 
 func victory():
 	$sprite.play("victory")
 	status = VICTORY
+
+func powerup_finished():
+	if status != DEAD:
+		status = RUNNING
+		$wings.hide()
