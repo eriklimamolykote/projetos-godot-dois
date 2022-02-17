@@ -4,6 +4,8 @@ export(String, FILE) var stage
 
 export(String, FILE) var music
 
+export var stage_name = "stg00"
+
 func _ready():
 	pass 
 
