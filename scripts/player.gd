@@ -13,9 +13,11 @@ onready var layer = collision_layer
 
 enum {IDLE, RUNNING, FLYING, DEAD, VICTORY}
 
-var status = RUNNING
+var status = IDLE
 
 func _ready():
+	add_to_group("player")
+	$sprite.play("idle")
 	set_process_input(true)
 	
 func _physics_process(delta):
@@ -24,8 +26,7 @@ func _physics_process(delta):
 		running(delta)
 	elif status == FLYING:
 		$wings.visible = true
-		fly()
-		flying(delta)	
+		flying(delta)
 	elif status == DEAD:
 		dead(delta)
 	
@@ -59,7 +60,9 @@ func running(delta):
 func dead(delta):
 	$sprite.play("hurt")
 	translate(velocity * delta)
-	velocity.y += grav * delta						
+	velocity.y += grav * delta
+	if global_position.y > ProjectSettings.get_setting("display/window/size/height") + 100:
+		get_tree().call_group("game", "player_died")						
 
 func _input(event):
 		if event is InputEventScreenTouch or Input.is_action_pressed("ui_jump"):
@@ -74,12 +77,13 @@ func flying(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	if jump:
 		$wings/anim.play("flap")
-		jump(800, false)
+		jump(800, true)
 		$flap.play()
 		
 	if is_on_floor():
-		get_tree().call_group("power_up_bar", "stop")
-		powerup_finished()					
+		if status == RUNNING:
+			get_tree().call_group("power_up_bar", "stop")
+			powerup_finished()					
 						
 func jump(force, controlled):
 	velocity.y = -force
@@ -92,18 +96,25 @@ func killed():
 		collision_layer = 0
 		velocity = Vector2(0, -1000)
 		$dead.play()
+		get_tree().call_group("power_up_bar", "stop")
+		get_tree().call_group("game", "player_dying")
 
 func fly():
 	$sprite.play("jump")
-	jump(800, false)
+	jump(800, true)
 	status = FLYING
 	$wings.visible = true
 
 func victory():
+	powerup_finished()
 	$sprite.play("victory")
 	status = VICTORY
+	get_tree().call_group("game", "player_victory")
 
 func powerup_finished():
 	if status != DEAD:
 		status = RUNNING
 		$wings.hide()
+
+func start():
+	status = RUNNING

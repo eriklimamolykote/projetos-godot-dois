@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/coil.tscn" type="PackedScene" id=2]
@@ -8,9 +8,8 @@
 [ext_resource path="res://scenes/carrot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/parallax_blue.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/parallax.gd" type="Script" id=8]
-[ext_resource path="res://scenes/power_up_box.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/coin_counter.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/spikes.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/fly_powerup.tscn" type="PackedScene" id=12]
 
 [node name="test_area" type="Node2D"]
 
@@ -40,9 +39,6 @@ position = Vector2( 62, 630 )
 [node name="coil" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2544, 956 )
 
-[node name="coil2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3247, 721 )
-
 [node name="coin" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1348, 776 )
 
@@ -61,6 +57,12 @@ position = Vector2( 2608, 544 )
 [node name="coin6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2736, 348 )
 
+[node name="coin7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3300, 584 )
+
+[node name="coin8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4044, 604 )
+
 [node name="wingman" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1864, 236 )
 
@@ -75,13 +77,10 @@ modulate_l3 = Color( 0.419608, 1, 0.494118, 1 )
 modulate_l4 = Color( 0.180392, 0.780392, 0.113725, 1 )
 
 [node name="carrot" parent="." instance=ExtResource( 6 )]
-position = Vector2( 784, 760 )
-
-[node name="hud" type="CanvasLayer" parent="."]
-
-[node name="power_up_box" parent="hud" instance=ExtResource( 9 )]
-position = Vector2( 571, 11 )
-
-[node name="coin_counter" parent="hud" instance=ExtResource( 10 )]
+position = Vector2( 4454, 773 )
 
 [node name="spikes" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1496, 843 )
+
+[node name="fly_powerup" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1888, 756 )

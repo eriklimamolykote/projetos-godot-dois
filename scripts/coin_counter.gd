@@ -1,6 +1,6 @@
 extends Node2D
 
-var coins = 0
+var coins = 0 setget set_coin
 
 func _ready():
 	update_label()
@@ -8,8 +8,11 @@ func _ready():
 	pass
 
 func pick_coin():
-	coins += 1
-	update_label()
+	self.coins += 1
 
 func update_label():
 	$coins.text = str(coins)
+
+func set_coin(val):
+	coins = val
+	update_label()

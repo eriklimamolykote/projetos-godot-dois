@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/stage_button.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Chocolate Bar Demo.otf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = SubResource( 1 )
+
+[node name="stage_button" type="Button"]
+margin_right = 112.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 2 )
+text = "Stage 1"
+script = ExtResource( 1 )
+stage = "res://scenes/test_area.tscn"
+
+[connection signal="pressed" from="." to="." method="_on_stage_button_pressed"]

@@ -1,8 +1,7 @@
 extends Area2D
 
 func _ready():
-	pass 
-
+	get_tree().call_group("game", "add_stage_coins")
 
 func _on_coin_body_entered(body):
 	$fx.play()
